@@ -41,7 +41,11 @@ app.use(express.raw({ type: "application/pdf", limit: "10mb" }));
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => {
-  res.status(200).json({ status: "ok" });
+  res.status(200).json({
+    status: "ok",
+    geminiKey: process.env.GEMINI_KEY ? "set (" + process.env.GEMINI_KEY.substring(0, 8) + "...)" : "MISSING",
+    mongoUri: process.env.MONGODB_URI ? "set" : "MISSING",
+  });
 });
 
 app.use("/api/auth", authRoutes);
