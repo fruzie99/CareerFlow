@@ -23,11 +23,12 @@ const allowedOrigins = (process.env.CLIENT_URLS || process.env.CLIENT_URL || "ht
   .map((origin) => origin.trim())
   .filter(Boolean);
 const localhostPattern = /^http:\/\/localhost:\d+$/;
+const vercelPattern = /\.vercel\.app$/;
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin) || localhostPattern.test(origin)) {
+      if (!origin || allowedOrigins.includes(origin) || localhostPattern.test(origin) || vercelPattern.test(origin)) {
         return callback(null, true);
       }
 
