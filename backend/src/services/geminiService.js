@@ -93,7 +93,7 @@ Return ONLY a valid JSON object (no markdown, no code fences) with this structur
     {
       "title": "Role title (e.g. Data Analyst)",
       "fitScore": <number 0-100>,
-      "salaryRange": "$XX,000 – $YY,000",
+      "salaryRange": "₹X,XX,000 – ₹Y,YY,000",
       "description": "1-2 sentence description of the role and why it fits",
       "skillsToLearn": ["skill1", "skill2", "skill3"],
       "recommendedCourse": {
@@ -195,7 +195,7 @@ Return ONLY valid JSON (no markdown fences):
     {
       "step": 1,
       "role": "Current / Entry role",
-      "avgSalary": "$XX,000 – $YY,000",
+      "avgSalary": "₹X,XX,000 – ₹Y,YY,000",
       "yearsInRole": "1-2 years",
       "keySkills": ["skill1", "skill2"],
       "certifications": ["cert1 (optional)"],
