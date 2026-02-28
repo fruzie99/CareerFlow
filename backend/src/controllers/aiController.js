@@ -32,8 +32,8 @@ const chatHandler = async (req, res, next) => {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ message: error.issues[0]?.message || "Invalid request" });
     }
-    console.error("AI chat error:", error.message);
-    return res.status(500).json({ message: "AI service is temporarily unavailable. Please try again." });
+    console.error("AI chat error:", error.message, error.stack);
+    return res.status(500).json({ message: "AI service is temporarily unavailable. Please try again.", debug: error.message });
   }
 };
 
@@ -45,8 +45,8 @@ const careerPathsHandler = async (req, res, next) => {
     const data = await gemini.generateCareerPaths(user);
     return res.status(200).json(data);
   } catch (error) {
-    console.error("AI career paths error:", error.message);
-    return res.status(500).json({ message: "Could not generate career paths. Please try again." });
+    console.error("AI career paths error:", error.message, error.stack);
+    return res.status(500).json({ message: "Could not generate career paths. Please try again.", debug: error.message });
   }
 };
 
@@ -62,8 +62,8 @@ const resumeFeedbackHandler = async (req, res, next) => {
     const data = await gemini.analyzeResume(req.body, profileCtx);
     return res.status(200).json(data);
   } catch (error) {
-    console.error("AI resume error:", error.message);
-    return res.status(500).json({ message: "Could not analyze resume. Please try again." });
+    console.error("AI resume error:", error.message, error.stack);
+    return res.status(500).json({ message: "Could not analyze resume. Please try again.", debug: error.message });
   }
 };
 
@@ -83,8 +83,8 @@ const fitScoreHandler = async (req, res, next) => {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ message: error.issues[0]?.message || "Invalid request" });
     }
-    console.error("AI fit score error:", error.message);
-    return res.status(500).json({ message: "Could not calculate fit score. Please try again." });
+    console.error("AI fit score error:", error.message, error.stack);
+    return res.status(500).json({ message: "Could not calculate fit score. Please try again.", debug: error.message });
   }
 };
 
@@ -104,8 +104,8 @@ const pathTreeHandler = async (req, res, next) => {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ message: error.issues[0]?.message || "Invalid request" });
     }
-    console.error("AI path tree error:", error.message);
-    return res.status(500).json({ message: "Could not generate career path. Please try again." });
+    console.error("AI path tree error:", error.message, error.stack);
+    return res.status(500).json({ message: "Could not generate career path. Please try again.", debug: error.message });
   }
 };
 
