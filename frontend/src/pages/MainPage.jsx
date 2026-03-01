@@ -305,37 +305,49 @@ function DashboardPage({ currentUser, onNavigate }) {
 
 function MainPage({ currentUser, onLogout, onUserUpdate }) {
   const [activeSectionId, setActiveSectionId] = useState("journey");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const activeSection = navItems.find((item) => item.id === activeSectionId);
 
   const handleNavigate = useCallback((tabId) => {
     setActiveSectionId(tabId);
+    setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   return (
     <main className="dashboard-page">
       <header className="top-nav">
-        <div className="brand">CareerFlow</div>
+        <div className="nav-top-row">
+          <div className="brand">CareerFlow</div>
+          <button
+            type="button"
+            className="mobile-menu-btn"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            aria-label="Toggle navigation"
+          >
+            {mobileMenuOpen ? "✕" : "☰"}
+          </button>
+        </div>
 
-        <nav className="nav-links" aria-label="Primary navigation">
+        <nav className={`nav-links${mobileMenuOpen ? " nav-open" : ""}`} aria-label="Primary navigation">
           {navItems.map((item) => (
             <button
               key={item.id}
               type="button"
               className={item.id === activeSectionId ? "nav-link active" : "nav-link"}
-              onClick={() => setActiveSectionId(item.id)}
+              onClick={() => handleNavigate(item.id)}
             >
               {item.label}
             </button>
           ))}
         </nav>
 
-        <div className="user-actions">
+        <div className={`user-actions${mobileMenuOpen ? " nav-open" : ""}`}>
           <button
             type="button"
             className={activeSectionId === "profile" ? "user-chip user-chip-active" : "user-chip"}
-            onClick={() => setActiveSectionId("profile")}
+            onClick={() => handleNavigate("profile")}
           >
             My Profile
           </button>
